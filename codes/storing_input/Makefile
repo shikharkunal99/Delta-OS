@@ -1,7 +1,7 @@
-all : kernel
+all : kernel-001
 
-run: kernel
-	qemu-system-i386 -kernel kernel
+run : kernel-001
+	qemu-system-i386 -kernel kernel-001
 
 kc.o : kernel.c
 	gcc -m32 -c kernel.c -o kc.o
@@ -10,5 +10,11 @@ kc.o : kernel.c
 kasm.o : kernel.asm
 	nasm -f elf32 kernel.asm -o kasm.o
 
-kernel : kasm.o kc.o
-	ld -m elf_i386 -T link.ld -o kernel kasm.o kc.o
+kernel-001 : kasm.o kc.o
+	ld -m elf_i386 -T link.ld -o kernel-001 kasm.o kc.o
+
+clean :
+	rm -fr *.o 
+
+
+	
