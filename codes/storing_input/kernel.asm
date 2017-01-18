@@ -6,7 +6,7 @@ section .text
         dd 0x00                    ;flags
         dd - (0x1BADB002 + 0x00)   ;checksum. m+f+c should be zero
 
-global start
+global start 
 global read_port
 global write_port
 global load_idt
