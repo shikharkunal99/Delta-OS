@@ -1,0 +1,37 @@
+void clear_screen(char clear_to, char attrib)
+{
+  char *text_video = (char*)0xB8000;
+  int pos=0;
+
+  while(pos<(80*25*2))
+  {
+    *text_video = clear_to;
+    *text_video++;
+    *text_video = attrib;
+    pos++;
+  }
+}
+void WriteText(char *str,char attrib)
+{
+	  int num;
+  char ch;
+
+  char *text_video = (char*)0xB8000;
+
+  while(*str!=0)
+  {
+    *text_video = *str;
+    *text_video++;
+    *text_video = attrib;
+    *text_video++;
+    *str++;
+  }
+  return;
+}
+void kmain( )
+{
+  clear_screen(0,0x02);
+  WriteText("Kernel loaded successfully!",0x02);
+  return;
+  
+}
