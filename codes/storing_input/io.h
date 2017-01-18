@@ -11,6 +11,7 @@
 
 
 #define ENTER_KEY_CODE 0x1C
+#define BS_KEY_CODE 0x0E
 #define SIZE 100
 
 
@@ -31,6 +32,12 @@ void endl(void)
 {
 	unsigned int line_size = BYTES_FOR_EACH_ELEMENT * COLUMNS_IN_LINE;
 	current_loc = current_loc + (line_size - current_loc % (line_size));
+}
+
+void backspace(void)
+{
+	vidptr[--current_loc] = 0x07;
+	vidptr[--current_loc] = ' ' ;
 }
 
 void clrscr(void)
@@ -94,9 +101,17 @@ char *scanstr(void)
 			}
 			if(keycode<0)
 				continue;
-			str[i++]=keyboard_map[(unsigned char) keycode];
-			vidptr[current_loc++] = keyboard_map[(unsigned char) keycode];
-			vidptr[current_loc++] = 0x07;
+			if(keycode == BS_KEY_CODE)
+			{
+				backspace();
+				str[--i]=' ';
+			}
+			else
+			{
+				str[i++]=keyboard_map[(unsigned char) keycode];
+				vidptr[current_loc++] = keyboard_map[(unsigned char) keycode];
+				vidptr[current_loc++] = 0x07;
+			}
 		}
 	}	
 }
@@ -121,9 +136,17 @@ int scanint(void)
 			}
 			if(keycode<0)
 				continue;
-			str[i++]=keyboard_map[(unsigned char) keycode];
-			vidptr[current_loc++] = keyboard_map[(unsigned char) keycode];
-			vidptr[current_loc++] = 0x07;
+			if(keycode == BS_KEY_CODE)
+			{
+				backspace();
+				str[--i]=' ';
+			}
+			else
+			{
+				str[i++]=keyboard_map[(unsigned char) keycode];
+				vidptr[current_loc++] = keyboard_map[(unsigned char) keycode];
+				vidptr[current_loc++] = 0x07;
+			}
 		}
 	}
 	
@@ -174,4 +197,3 @@ void printch(char ch)
 		vidptr[current_loc++] = ch;
 		vidptr[current_loc++] = 0x07;
 }
-
