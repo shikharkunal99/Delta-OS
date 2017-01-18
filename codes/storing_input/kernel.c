@@ -1,57 +1,62 @@
 #include "io.h"
 
-/*
+
 void calculator()
 {
-	char operator;
-    double firstNumber,secondNumber;
+    printstr("Calculator");
+    endl();
+    char operator;
+    int a,b;
 
     printstr("Enter an operator (+, -, *,): ");
-    scanf("%c", &operator);
+    operator=scanch();
 
     printstr("Enter two operands: ");
-    scanf("%lf %lf",&firstNumber, &secondNumber);
-
+    a=scanint();
+    b=scanint();
+    
     switch(operator)
     {
         case '+':
-            printf("%.1lf + %.1lf = %.1lf",firstNumber, secondNumber, firstNumber + secondNumber);
+            printint(a+b);
+            endl();
             break;
 
         case '-':
-            printf("%.1lf - %.1lf = %.1lf",firstNumber, secondNumber, firstNumber - secondNumber);
-            break;
+            printint(a-b);
+            endl();
 
         case '*':
-            printf("%.1lf * %.1lf = %.1lf",firstNumber, secondNumber, firstNumber * secondNumber);
-            break;
-
+            printint(a*b);
+            endl();
         case '/':
-            printf("%.1lf / %.1lf = %.1lf",firstNumber, secondNumber, firstNumber / firstNumber);
-            break;
+            if(b==0)
+                printstr("Division by 0 not defined");
+            else
+                printint(a/b);
+            endl();
 
-        // operator doesn't match any case constant (+, -, *, /)
         default:
-            printf("Error! operator is not correct");
+            printstr("Error! operator is not correct");
+            calculator();
     }
-    
-    return 0;
+     
+   
 }
 
-*/
 
 
 void kmain(void)
 {
-	const char *str = "what is your name?";
-	clrscr();
-	printstr(str);
-	endl();
-	char *name=scanstr();
-	printstr("welcome ");
-	printstr(name);
-	endl();
-	//calculator();
+    const char *str = "what is your name?";
+    clrscr();
+    printstr(str);
+    endl();
+    char *name=scanstr();
+    printstr("welcome ");
+    printstr(name);
+    endl();
+    calculator();
 
-	
+    
 }
