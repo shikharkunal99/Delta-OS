@@ -1,2 +1,2 @@
-# Dela-OS
+# Delta-OS
 delta OS
